@@ -38,14 +38,7 @@ document.body.addEventListener('change', function (e) {
 		preview.src = './audio/' + e.target.options[e.target.selectedIndex].value;
 		file.value = './audio/' + e.target.options[e.target.selectedIndex].value;
 		preview.oncanplay = () => {
-			let totalDuration = 0;
 			e.target.parentNode.parentNode.querySelector('.sample__duration').value = Math.round(preview.duration * 1000);
-			let durations = document.querySelectorAll('.sample__duration');
-			durations.forEach((el, index)=>{
-				totalDuration += parseInt(el.value);
-			});
-			document.querySelector('.counter').innerHTML = totalDuration;
-
 		}
   };
 });
@@ -58,12 +51,22 @@ addBtn.addEventListener('click', () => {
 });
 
 playBtn.addEventListener('click', () => {
+	let totalDuration = 0;
+	let totalOffset = 0;
 	let samples = document.querySelectorAll('.sample');
 	samples.forEach((el, index)=>{
 		let sound = el.querySelector('audio');
+		let duration = el.querySelector('.sample__duration').value;
 		let offset = el.querySelector('.offset').value;
+
+		totalDuration += parseInt(duration);
+		totalOffset += parseInt(offset);
+
 		setTimeout((offset)=>{
 			sound.play();
 		},(offset));
+
 	})
+	document.querySelector('.counter').innerHTML = (totalDuration);
+
 });
