@@ -51,22 +51,15 @@ addBtn.addEventListener('click', () => {
 });
 
 playBtn.addEventListener('click', () => {
-	let totalDuration = 0;
-	let totalOffset = 0;
 	let samples = document.querySelectorAll('.sample');
 	samples.forEach((el, index)=>{
 		let sound = el.querySelector('audio');
-		let duration = el.querySelector('.sample__duration').value;
 		let offset = el.querySelector('.offset').value;
-
-		totalDuration += parseInt(duration);
-		totalOffset += parseInt(offset);
 
 		setTimeout((offset)=>{
 			sound.play();
 		},(offset));
 
 	})
-	document.querySelector('.counter').innerHTML = (totalDuration);
 
 });
