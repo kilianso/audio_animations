@@ -20,6 +20,9 @@ const template = data => `
 		<label>Offset (ms)</label>
 		<input class="offset" type="number" value="0">
 	</div>
+	<div class="column">
+		<button class="remove">remove</button>
+	</div>
 	<audio class="sample__preview" hidden controls autoplay preload="auto"></audio>
 	<input class="sample__file" type="text" hidden>
 `;
@@ -30,7 +33,9 @@ const data = {
 const addBtn = document.querySelector('.add_samples');
 const playBtn = document.querySelector('.play');
 
+// live bindings for dynamically added elements
 document.body.addEventListener('change', function (e) {
+	e.preventDefault();
   if(e.target && e.target.classList.contains('sample__sound') ) {
 		let preview = e.target.parentNode.parentNode.querySelector('.sample__preview');
 		let file = e.target.parentNode.parentNode.querySelector('.sample__file');
@@ -43,6 +48,14 @@ document.body.addEventListener('change', function (e) {
   };
 });
 
+document.body.addEventListener('click', function (e) {
+	e.preventDefault();
+  if(e.target && e.target.classList.contains('remove') ) {
+		e.target.parentNode.parentNode.parentNode.removeChild(e.target.parentNode.parentNode);
+	};
+});
+
+// normal bindigs for static dom elements
 addBtn.addEventListener('click', () => {
 	let line = document.createElement('div')
 	line.classList.add('sample');

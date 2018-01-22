@@ -24,6 +24,7 @@ label, select, input{
 
 .sample{
 	display: flex;
+	align-items: flex-end;
 }
 
 .column{
@@ -32,5 +33,7 @@ label, select, input{
 
 button{
 	margin: 1rem 0;
-
+}
+.remove{
+	margin: 0.25rem 0;
 }
