@@ -28,7 +28,16 @@ const template = data => `
 `;
 
 const data = {
-	samples: ['Roland A Line 02.wav','cw_junobass04.wav', 'Arp A C1.wav'],
+	samples: [
+		'Arp A A1.wav',
+		'Arp A C1.wav',
+		'Arp D Line 01.wav',
+		'cw_junobass01.wav',
+		'cw_junobass22.wav',
+		'cw_junobass23.wav',
+		'cw_junobass24.wav',
+		'Roland A Line 02.wav'
+	]
 };
 const addBtn = document.querySelector('.add_samples');
 const playBtn = document.querySelector('.play');
