@@ -19,6 +19,7 @@ img{
 
 label, select, input{
 	display: block;
+	margin: 0.25rem 0;
 }
 
 .sample{

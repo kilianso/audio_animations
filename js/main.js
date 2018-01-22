@@ -1,7 +1,8 @@
 const template = data => `
 	<div class="column">
-		<label>Select sample</label>
+		<label>Audio snippet</label>
 		<select class="sample__sound" name="">
+			<option selected="true" disabled="disabled">Select sound</option>
 			${
 				data.samples.map(
 					item => `<option value="${item}">${item}</option>`
@@ -16,42 +17,53 @@ const template = data => `
 	</div>
 
 	<div class="column">
-		<label>Next (ms)</label>
-		<input class="delay" type="number" value="0">
+		<label>Offset (ms)</label>
+		<input class="offset" type="number" value="0">
 	</div>
 	<audio class="sample__preview" hidden controls autoplay preload="auto"></audio>
-	<input id="sample__file" type="number" hidden>
+	<input class="sample__file" type="text" hidden>
 `;
 
 const data = {
 	samples: ['Roland A Line 02.wav','cw_junobass04.wav', 'Arp A C1.wav'],
-	title: "My New Post",
-	body: "This is my first post!"
 };
+const addBtn = document.querySelector('.add_samples');
+const playBtn = document.querySelector('.play');
 
-document.body.addEventListener( 'change', function (e) {
+document.body.addEventListener('change', function (e) {
   if(e.target && e.target.classList.contains('sample__sound') ) {
-    console.log('yo');
+		let preview = e.target.parentNode.parentNode.querySelector('.sample__preview');
+		let file = e.target.parentNode.parentNode.querySelector('.sample__file');
+
+		preview.src = './audio/' + e.target.options[e.target.selectedIndex].value;
+		file.value = './audio/' + e.target.options[e.target.selectedIndex].value;
+		preview.oncanplay = () => {
+			let totalDuration = 0;
+			e.target.parentNode.parentNode.querySelector('.sample__duration').value = Math.round(preview.duration * 1000);
+			let durations = document.querySelectorAll('.sample__duration');
+			durations.forEach((el, index)=>{
+				totalDuration += parseInt(el.value);
+			});
+			document.querySelector('.counter').innerHTML = totalDuration;
+
+		}
   };
 });
 
-// document.addEventListener('DOMContentLoaded', () => {
-// 	const sampler = document.getElementById('sampler');
-// 	const sounds = document.getElementById('sounds');
-// 	const preview = document.getElementById('preview');
-// 	const duration = document.getElementById('duration');
-// 	sounds.addEventListener('change', () => {
-// 		preview.src = './audio/' + sounds.options[sounds.selectedIndex].value;
-// 		preview.oncanplay = () => {
-// 			duration.value = Math.round(preview.duration*1000);
-// 		}
-// 	});
-// });
-
-const addBtn = document.querySelector('.add_samples');
 addBtn.addEventListener('click', () => {
 	let line = document.createElement('div')
 	line.classList.add('sample');
 	line.innerHTML = template(data);
 	sampler.appendChild(line);
+});
+
+playBtn.addEventListener('click', () => {
+	let samples = document.querySelectorAll('.sample');
+	samples.forEach((el, index)=>{
+		let sound = el.querySelector('audio');
+		let offset = el.querySelector('.offset').value;
+		setTimeout((offset)=>{
+			sound.play();
+		},(offset));
+	})
 });
