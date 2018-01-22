@@ -17,8 +17,8 @@ const template = data => `
 	</div>
 
 	<div class="column">
-		<label>Offset (ms)</label>
-		<input class="offset" type="number" value="0">
+		<label>Starts at (ms)</label>
+		<input class="sample__start" type="number" value="0">
 	</div>
 	<div class="column">
 		<button class="remove">remove</button>
@@ -67,11 +67,11 @@ playBtn.addEventListener('click', () => {
 	let samples = document.querySelectorAll('.sample');
 	samples.forEach((el, index)=>{
 		let sound = el.querySelector('audio');
-		let offset = el.querySelector('.offset').value;
+		let startsAt = el.querySelector('.sample__start').value;
 
-		setTimeout((offset)=>{
+		setTimeout((startsAt)=>{
 			sound.play();
-		},(offset));
+		},(startsAt));
 
 	})
 
