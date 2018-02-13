@@ -1,0 +1,30 @@
+{
+	"name": "audio_animations",
+	"version": "1.0.0",
+	"description": "Prototyping Audio to Text Animations.",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "pingy dev",
+		"export": "pingy export"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/kilianso/audio_animations.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/kilianso/audio_animations/issues"
+	},
+	"homepage": "https://github.com/kilianso/audio_animations#readme",
+	"dependencies": {},
+	"devDependencies": {
+		"pug": "",
+		"node-sass": "^4",
+		"babel-core": "^6",
+		"babel-preset-env": "^1",
+		"@pingy/cli": "^0.12.3"
+	}
+}
