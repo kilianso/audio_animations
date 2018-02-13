@@ -37,3 +37,9 @@ button{
 .remove{
 	margin: 0.25rem 0;
 }
+
+.json_preview{
+	background: #EEE;
+	padding: 15px;
+	white-space: pre-wrap;
+}
