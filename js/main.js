@@ -39,6 +39,7 @@ const data = {
 		'Roland A Line 02.wav'
 	]
 };
+
 const sampler = document.querySelector('#sampler');
 const addBtn = document.querySelector('.add_samples');
 const playBtn = document.querySelector('.play');
@@ -96,7 +97,6 @@ playBtn.addEventListener('click', () => {
 
 	// clear array
 	output = [];
-
 
 	// Nodelist to Array the ES6 way
 	// https://stackoverflow.com/questions/2735067/how-to-convert-a-dom-node-list-to-an-array-in-javascript
