@@ -1,14 +1,16 @@
 const template = data => `
 	<div class="column">
 		<label>Audio snippet</label>
-		<select class="sample__sound" name="">
-			<option selected="true" disabled="disabled">Select sound</option>
-			${
-				data.samples.map(
-					item => `<option value="${item}">${item}</option>`
-				).join('\n')
-			}
-		</select>
+		<div class="select">
+			<select class="sample__sound" name="">
+				<option selected="true" disabled="disabled">Select sound</option>
+				${
+					data.samples.map(
+						item => `<option value="${item}">${item}</option>`
+					).join('\n')
+				}
+			</select>
+		</div>
 	</div>
 
 	<div class="column">
@@ -57,13 +59,14 @@ let output = [];
 document.body.addEventListener('change', function (e) {
 	e.preventDefault();
   if(e.target && e.target.classList.contains('sample__sound') ) {
-		let preview = e.target.parentNode.parentNode.querySelector('.sample__preview');
-		let file = e.target.parentNode.parentNode.querySelector('.sample__file');
+		// bubbling up the DOM to write into hidden input fields
+		let preview = e.target.parentNode.parentNode.parentNode.querySelector('.sample__preview');
+		let file = e.target.parentNode.parentNode.parentNode.querySelector('.sample__file');
 
 		preview.src = './audio/' + e.target.options[e.target.selectedIndex].value;
 		file.value = './audio/' + e.target.options[e.target.selectedIndex].value;
 		preview.oncanplay = () => {
-			e.target.parentNode.parentNode.querySelector('.sample__duration').value = Math.round(preview.duration * 1000);
+			e.target.parentNode.parentNode.parentNode.querySelector('.sample__duration').value = Math.round(preview.duration * 1000);
 		}
   };
 });
