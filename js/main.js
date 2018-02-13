@@ -39,8 +39,18 @@ const data = {
 		'Roland A Line 02.wav'
 	]
 };
+const sampler = document.querySelector('#sampler');
 const addBtn = document.querySelector('.add_samples');
 const playBtn = document.querySelector('.play');
+const preview = document.querySelector('.json_preview');
+
+function Output (sample, duration, offset){
+	this.sample = sample;
+	this.duration = duration;
+	this.offset = offset;
+}
+
+let output = [];
 
 // live bindings for dynamically added elements
 document.body.addEventListener('change', function (e) {
@@ -82,6 +92,19 @@ playBtn.addEventListener('click', () => {
 			sound.play();
 		},(startsAt));
 
+	});
+
+	// clear array
+	output = [];
+
+
+	// Nodelist to Array the ES6 way
+	// https://stackoverflow.com/questions/2735067/how-to-convert-a-dom-node-list-to-an-array-in-javascript
+	const getLines = [...sampler.querySelectorAll('.sample')];
+	getLines.forEach(function(el, index, arr){
+		let makeObj = new Output(el.querySelector('.sample__sound').value, el.querySelector('.sample__duration').value, el.querySelector('.sample__start').value)
+		output.push(makeObj);
 	})
+	preview.innerHTML = JSON.stringify(output);
 
 });
