@@ -1,0 +1,15 @@
+doctype html
+html
+	head
+		meta(charset="utf-8")
+		title Audio Animations
+		link(rel="stylesheet" href="./styles/normalize.css")
+		link(rel="stylesheet" href="./styles/main.css")
+	body
+		section.container
+			form#sampler
+			button.add_samples + add samples
+			button.play play / preview
+			button.submit(type="submit") submit
+			pre.json_preview JSON goes here
+			script(src="./scripts/main.js")
